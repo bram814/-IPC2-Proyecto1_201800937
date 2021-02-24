@@ -35,6 +35,9 @@ class Lista_Circular():
             if nodo_actual.get_siguiente() == self.get_cabeza():
                 print(nodo_actual.get_dato())
     
+
+    
+    
     def get_cabeza(self):
         return self.cabeza
     def set_cabeza(self,cabeza):
