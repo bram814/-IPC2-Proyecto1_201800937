@@ -1,10 +1,12 @@
 from controlador.Archivo import Archivo
+from modelos.Lista_Circular import Lista_Circular
 
 class main():
 
 
     def __init__(self):
         self.cargar_archivo = Archivo()
+        self.lista = Lista_Circular()
 
     def __menu__(self):
 
@@ -21,10 +23,15 @@ class main():
 
                 if variable == 1:
                     print('Opcion 1')
-                    return False
+                    self.cargar_archivo.__cargar__()
                 elif variable == 2:
                     print('Opcion 2')
-                    return False
+                    self.lista.agregar(1,2,1)
+                    self.lista.agregar(1,2,2)
+                    self.lista.agregar(1,2,3)
+                    self.lista.agregar(1,2,4)
+                    self.lista.agregar(1,2,5)
+                    self.lista.mostrar()
                 elif variable == 3:
                     print('Opcion 3')
                     return False
@@ -33,6 +40,9 @@ class main():
                     return False
                 elif variable == 5:
                     print('Opcion 5')
+                    return False
+                elif variable == 6:
+                    print("Exit")
                     return False
                 else:
                     print(f"\nEsa Opcion no es correcta: {variable}\n")  

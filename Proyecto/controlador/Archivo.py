@@ -1,16 +1,18 @@
+import xml.etree.ElementTree as ET 
+
 class Archivo():
 
     def __init__(self):
         pass
 
-    def __cargar__(self,ruta,lista_error,lista_token):
-        ruta = str(input('Ingrese la Ruta del Archivo: '))
-        try:
+    def __cargar__(self):
         
-            archivo = open(f"{ruta}","r")
-            texto = archivo.readlines()
-            archivo.close()
-            print(texto)
-            
-        except (FileNotFoundError):
-            print("Error")
+        name_route = str(input("Ruta: "))
+        file_route = ET.parse(name_route)
+        root = file_route.getroot()
+
+        print(root)
+
+        for element in root:
+            for subelement in element:
+                print(subelement)   
