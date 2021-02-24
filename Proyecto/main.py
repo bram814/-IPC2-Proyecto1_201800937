@@ -31,13 +31,14 @@ class main():
                     self.lista.agregar(1,2,3)
                     self.lista.agregar(1,2,4)
                     self.lista.agregar(1,2,5)
-                    self.lista.mostrar()
+                    
                 elif variable == 3:
                     print('Opcion 3')
-                    return False
+                    self.lista.mostrar()
+                    
                 elif variable == 4:
                     print('Opcion 4')
-                    return False
+                    self.lista.eliminar(5)
                 elif variable == 5:
                     print('Opcion 5')
                     return False

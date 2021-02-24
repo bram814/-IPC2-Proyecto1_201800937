@@ -41,20 +41,22 @@ class Lista_Circular():
         nodo_anterior = self.get_ultimo()
 
         while nodo_actual.get_siguiente() != self.get_cabeza():
-
-            if nodo_actual.get_siguiente() == self.get_cabeza():
-                if nodo_actual == self.get_ultimo():
-                    nodo_anterior.set_siguiente(self.get_ultimo().get_siguiente())
-                    self.set_ultimo(nodo_anterior)
-            else:
-                if nodo_actual.get_dato() == dato:
+           
+            if nodo_actual.get_dato() == dato:
+                if (nodo_actual == self.get_cabeza()):
                     self.set_cabeza(self.get_cabeza().get_siguiente())
-                    self.set_ultimo(self.get_cabeza())
+                    self.get_ultimo().set_siguiente(self.get_cabeza())
                 else:
                     nodo_anterior.set_siguiente(nodo_actual.get_siguiente())
 
             nodo_anterior = nodo_actual
             nodo_actual = nodo_actual.get_siguiente()
+
+            if nodo_actual.get_siguiente() == self.get_cabeza():
+                if nodo_actual.get_dato() == dato:
+                    if nodo_actual == self.get_ultimo():
+                        nodo_anterior.set_siguiente(self.get_ultimo().get_siguiente())
+                        self.set_ultimo(nodo_anterior)
     
     def get_cabeza(self):
         return self.cabeza
