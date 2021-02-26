@@ -3,7 +3,17 @@ import xml.etree.ElementTree as ET
 class Archivo():
 
     def __init__(self):
-        pass
+        # LISTA CIRCULAR
+        self.contador = 1
+        self.estado = 1
+        
+        # ANALIZADOR
+        self.fila = 1
+        self.columna = 1
+        
+        self.fila_limite = 0
+        self.columna_limite = 0
+
 
     def __cargar__(self):
         
@@ -14,5 +24,6 @@ class Archivo():
         print(root)
 
         for element in root:
+            print(f"Tag: {element.tag} Nombre: {element.attrib['nombre']}  n: {element.attrib['n']} m: {element.attrib['m']}")
             for subelement in element:
-                print(subelement)   
+                print(f"Posicion[ x = {subelement.attrib['x']} y = {subelement.attrib['y']}] Dato:{subelement.text}")   

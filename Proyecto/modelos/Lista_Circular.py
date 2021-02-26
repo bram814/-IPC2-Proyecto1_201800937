@@ -13,8 +13,8 @@ class Lista_Circular():
         return False
     
 
-    def agregar(self,x,y,dato):
-        nuevo_nodo = Nodo(x,y,dato)
+    def agregar(self,contador,x,y,dato,estado):
+        nuevo_nodo = Nodo(contador,x,y,dato,estado)
         if self.vacia() == True:
             self.set_cabeza(nuevo_nodo)
             self.set_ultimo(self.get_cabeza())
@@ -34,6 +34,19 @@ class Lista_Circular():
             nodo_actual = nodo_actual.get_siguiente()
             if nodo_actual.get_siguiente() == self.get_cabeza():
                 print(nodo_actual.get_dato())
+
+    def modificar_estado(self,contador,x,y,dato,estado):
+        nodo_actual = self.get_cabeza()
+        
+        while nodo_actual.get_siguiente() != self.get_cabeza():
+            
+            if nodo_actual.get_x() == x and nodo_actual.get_y() == y and nodo_actual.get_contador() == contador and nodo_actual.get_estado() == estado:
+                nodo_actual.set_estado(estado)
+            nodo_actual = nodo_actual.get_siguiente()
+            if nodo_actual.get_siguiente() == self.get_cabeza():
+                if nodo_actual.get_x() == x and nodo_actual.get_y() == y and nodo_actual.get_contador() == contador and nodo_actual.get_estado() == estado:
+                    nodo_actual.set_estado(estado)
+
 
     def eliminar(self,dato):
 

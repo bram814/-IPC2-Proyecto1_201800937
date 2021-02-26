@@ -1,8 +1,9 @@
 class Nodo():
 
-    def __init__(self,x,y,dato,siguiente = None):
+    def __init__(self,contador,x,y,dato,estado,siguiente = None):
 
-        self.contador = 0
+        self.contador = contador
+        self.estado = estado
         self.x = x
         self.y = y
         self.dato = dato
@@ -28,3 +29,13 @@ class Nodo():
         return self.siguiente
     def set_siguiente(self,siguiente):
         self.siguiente = siguiente
+    
+    def get_contador(self):
+        return self.contador
+    def set_contador(self,contador):
+        self.contador = contador
+    
+    def get_estado(self):
+        return self.estado
+    def set_estado(self,estado):
+        self.estado = estado

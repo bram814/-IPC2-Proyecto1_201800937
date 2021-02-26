@@ -26,19 +26,20 @@ class main():
                     self.cargar_archivo.__cargar__()
                 elif variable == 2:
                     print('Opcion 2')
-                    self.lista.agregar(1,2,1)
-                    self.lista.agregar(1,2,2)
-                    self.lista.agregar(1,2,3)
-                    self.lista.agregar(1,2,4)
-                    self.lista.agregar(1,2,5)
+                    #self.lista.agregar(1,2,1)
+                    #self.lista.agregar(1,2,2)
+                    #self.lista.agregar(1,2,3)
+                    #self.lista.agregar(1,2,4)
+                    #self.lista.agregar(1,2,5)
                     
                 elif variable == 3:
                     print('Opcion 3')
-                    self.lista.mostrar()
+                    #self.lista.mostrar()
                     
                 elif variable == 4:
                     print('Opcion 4')
-                    self.lista.eliminar(5)
+                    #dato = int(input("datoL: "))
+                    #self.lista.eliminar(dato)
                 elif variable == 5:
                     print('Opcion 5')
                     return False
