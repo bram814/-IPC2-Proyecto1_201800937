@@ -44,6 +44,8 @@ class Archivo():
                     self.estado = True
                     if (int(subelement.text)<0):
                         print(f"Algo anda mal: {subelement.text}")
+                        self.estado = False
+                        break
                 else:
                     self.estado = False
                     break
@@ -62,8 +64,40 @@ class Archivo():
                     self.lista_nombre.agregar(self.contador,int(element.attrib['n']),int(element.attrib['m']),str(element.attrib['nombre']),self.estado)
                     self.contador += 1
 
+        
+        print()
+        i = 0
+        nodo_lista_nombre = self.lista_nombre.get_cabeza()
+        while i < self.lista_nombre.size:
+
+            if (nodo_lista_nombre.get_estado()==True):
+                print(f"CONTADOR: {nodo_lista_nombre.get_contador()}")
+                contador = nodo_lista_nombre.get_contador()
+                
+                nodo_actual = self.lista_frecuencia.get_cabeza()
+                j = 0
+                while j < self.lista_frecuencia.size:
+                    if (int(nodo_actual.get_contador()) == int(contador)):
+                        if 0 < int(nodo_actual.get_dato()): # si es el dato es mayor a 0, se AGREGA un 1
+                            self.lista_acceso.agregar(nodo_actual.get_contador(),nodo_actual.get_x(),nodo_actual.get_y(),1,nodo_lista_nombre.get_estado())
+                        elif 0 == int(nodo_actual.get_dato()): # si es dato es igual a 0, se AGREGA un 0
+                            self.lista_acceso.agregar(nodo_actual.get_contador(),nodo_actual.get_x(),nodo_actual.get_y(),0,nodo_lista_nombre.get_estado())
+                        
+                    nodo_actual = nodo_actual.get_siguiente()
+                    j += 1
+                
+            nodo_lista_nombre = nodo_lista_nombre.get_siguiente()
+            i += 1
+        
+        
+        
+        
+        
         print('\nMatriz Frecuencia Parte 1')
         self.lista_nombre.mostrar()
-        print('\nMatriz Frecuencia Parte 1')
+        print('\nMatriz Frecuencia Parte 2')
         self.lista_frecuencia.mostrar() 
+        print('\nMatriz Frecuencia Parte 3')
+        self.lista_acceso.mostrar()
         print()
+
