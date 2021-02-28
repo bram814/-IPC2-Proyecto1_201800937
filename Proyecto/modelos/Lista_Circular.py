@@ -5,14 +5,13 @@ class Lista_Circular():
     def __init__(self, cabeza = None, ultimo = None):
         self.cabeza = cabeza
         self.utlimo = ultimo
-        self.size = 0
+        self.size = 0   
     
     def vacia(self):
         if self.cabeza == None:
             return True
         return False
     
-
     def agregar(self,contador,x,y,dato,estado):
         nuevo_nodo = Nodo(contador,x,y,dato,estado)
         if self.vacia() == True:
@@ -27,17 +26,17 @@ class Lista_Circular():
         self.size += 1
 
     def mostrar(self):
+        i = 0
         nodo_actual = self.get_cabeza()
-        print('MOSTRAR DATOS ----------')
-        while nodo_actual.get_siguiente() != self.get_cabeza():
-            print(nodo_actual.get_dato())
+        print(self.size)
+        while i < self.size:
+            print(nodo_actual) 
             nodo_actual = nodo_actual.get_siguiente()
-            if nodo_actual.get_siguiente() == self.get_cabeza():
-                print(nodo_actual.get_dato())
+            i += 1
 
     def modificar_estado(self,contador,x,y,dato,estado):
         nodo_actual = self.get_cabeza()
-        
+
         while nodo_actual.get_siguiente() != self.get_cabeza():
             
             if nodo_actual.get_x() == x and nodo_actual.get_y() == y and nodo_actual.get_contador() == contador and nodo_actual.get_estado() == estado:
@@ -46,7 +45,6 @@ class Lista_Circular():
             if nodo_actual.get_siguiente() == self.get_cabeza():
                 if nodo_actual.get_x() == x and nodo_actual.get_y() == y and nodo_actual.get_contador() == contador and nodo_actual.get_estado() == estado:
                     nodo_actual.set_estado(estado)
-
 
     def eliminar(self,dato):
 
@@ -70,6 +68,19 @@ class Lista_Circular():
                     if nodo_actual == self.get_ultimo():
                         nodo_anterior.set_siguiente(self.get_ultimo().get_siguiente())
                         self.set_ultimo(nodo_anterior)
+
+    def buscar(self,contador,x,y):
+
+        i = 0
+        estado = False
+        nodo_actual =self.get_cabeza()
+        while i < self.size:
+            if nodo_actual.get_contador() == contador and nodo_actual.get_x() == x and nodo_actual.get_y() == y:
+                estado = True
+                return estado
+            nodo_actual = nodo_actual.get_siguiente()
+            i += 1
+        return estado
     
     def get_cabeza(self):
         return self.cabeza
@@ -82,3 +93,16 @@ class Lista_Circular():
         self.utlimo = ultimo
     
 
+"""
+def mostrar2(self):
+        nodo_actual = self.get_cabeza()
+        print('MOSTRAR DATOS ----------')
+        if (self.size == 1):
+            print(f"{nodo_actual} MOSTRANDO {nodo_actual.get_siguiente()}")
+        while nodo_actual.get_siguiente() != self.get_cabeza():
+            print(nodo_actual.get_dato())
+            nodo_actual = nodo_actual.get_siguiente()
+            if nodo_actual.get_siguiente() == self.get_cabeza():
+                print(nodo_actual.get_dato())
+
+"""

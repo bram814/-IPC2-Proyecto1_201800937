@@ -1,12 +1,13 @@
 class Nodo():
 
-    def __init__(self,contador,x,y,dato,estado,siguiente = None):
+    def __init__(self,contador,x,y,dato,estado,frecuencia=None,siguiente = None):
 
         self.contador = contador
         self.estado = estado
         self.x = x
         self.y = y
         self.dato = dato
+        self.frecuencia = frecuencia
         self.siguiente = siguiente
         
     
@@ -39,3 +40,11 @@ class Nodo():
         return self.estado
     def set_estado(self,estado):
         self.estado = estado
+    
+    def get_frecuencia(self):
+        return self.frecuencia
+    def set_frecuencia(self,frecuencia):
+        self.frecuencia = frecuencia
+
+    def __str__(self):
+        return f" {self.contador}.-  (n: {self.x} m: {self.y}) Dato: {self.dato} "
