@@ -18,7 +18,8 @@ class main():
             2. Procesar Archivo
             3. Escribir archivo salida
             4. Mostrar datos del estudiante
-            5. Generar gráfica""")
+            5. Generar gráfica
+            6. Salida""")
             try:
                 variable = int(input("Opcion a escoger:"))
             
@@ -29,14 +30,16 @@ class main():
                     self.procesamiento.procesar_datos(self.cargar_archivo)
                     
                 elif variable == 3:
-                    print('Opcion 3')
+                    ruta_salida = str(input("Escribir ruta especifica: "))
+                    
                     
                 elif variable == 4:
-                    print('Opcion 4')
+                    print('''Nombre: Jose Abraham Solorzano Herrera\n\
+                    Carnet: 201800937 ''')
 
                 elif variable == 5:
                     print('Opcion 5')
-                    return False
+                    
                 elif variable == 6:
                     print("Exit")
                     return False

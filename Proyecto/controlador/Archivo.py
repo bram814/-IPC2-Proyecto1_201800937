@@ -8,7 +8,6 @@ class Archivo():
         self.lista_nombre = Lista_Circular()
         self.lista_frecuencia = Lista_Circular()
         self.lista_acceso = Lista_Circular()
-        self.lista_reducida = Lista_Circular()
         self.lista_grupos = Lista_Circular()
 
         self.contador = 1
