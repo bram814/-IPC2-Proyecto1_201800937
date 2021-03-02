@@ -9,6 +9,7 @@ class Archivo():
         self.lista_frecuencia = Lista_Circular()
         self.lista_acceso = Lista_Circular()
         self.lista_reducida = Lista_Circular()
+        self.lista_grupos = Lista_Circular()
 
         self.contador = 1
         self.validacion = 1 #   1-> aceptado      0-> no aceptado
@@ -93,20 +94,13 @@ class Archivo():
         #estado_frecuencia = False
         
         
-        self.frecuencia()
+        self.frecuencia() # ESTA SE ENCARGA DE BUSCAR PATRONES
+        self.asignar_frecuencia_vacia() # LAS QUE ESTAN VACIAS LES AGREGA UN GRUPO (LAS UNICAS)
+        self.asignar_frecuencia()   # AGREGA LAS FRECUENCIAS A LA LISTA_FRECUENCIA
+        self.validar_grupos() # SE ENCARGA DE GUARDAR LOS GRUPOS
         
         
         
-        print('\nMatriz Frecuencia Parte 1')
-        self.lista_nombre.mostrar()
-        print('\nMatriz Frecuencia Parte 2')
-        self.lista_frecuencia.mostrar() 
-        print('\nMatriz Frecuencia Parte 3')
-        self.lista_acceso.mostrar()
-        print()
-        self.asignar_frecuencia_vacia()
-        print('\nMatriz Frecuencia ARREGLADA Parte 3')
-        self.lista_acceso.mostrar()
         
 
     def frecuencia(self):
@@ -117,14 +111,14 @@ class Archivo():
 
             if (nodo_lista_nombre.get_estado()==True):
                 contador = nodo_lista_nombre.get_contador()
-                limite_y = nodo_lista_nombre.get_y()
-                limite_x = nodo_lista_nombre.get_x()
+                #limite_y = nodo_lista_nombre.get_y()
+                #limite_x = nodo_lista_nombre.get_x()
                 x = 0
                 nodo_acceso_actual = self.lista_acceso.get_cabeza()
                 while x < self.lista_acceso.size:
                     
                     if (int(nodo_acceso_actual.get_contador()) == int(contador)):
-                        global_x = nodo_acceso_actual.get_x()
+                        #global_x = nodo_acceso_actual.get_x()
                         if (self.comparacion_acceso(nodo_lista_nombre,nodo_acceso_actual,nodo_acceso_actual.get_x(),nodo_acceso_actual.get_y(),nodo_acceso_actual.get_dato())==True):
                             pass
                         else:
@@ -152,7 +146,7 @@ class Archivo():
                         if nodo_actual.get_dato() == dato:
                             
                             #print(f"({nodo_acceso_actual.get_x()},{y})-----------------{nodo_actual.get_contador()}.- ({nodo_actual.get_x()},{nodo_actual.get_y()}) ENCONTRADO? {nodo_actual.get_dato()}")
-                            tem = y
+                            #tem = y
                             contador_fila += 1
                             y = int(nodo_actual.get_y()) + 1
                             dato = self.buscador_nodo(nodo_actual.get_contador(),nodo_acceso_actual.get_x(),y)
@@ -260,4 +254,103 @@ class Archivo():
                     j+=1
 
             nodo_matriz_nombre = nodo_matriz_nombre.get_siguiente()
+            i += 1
+
+    def asignar_frecuencia(self):
+        
+        nodo_lista_nombre = self.lista_nombre.get_cabeza()
+        i = 0
+        while i < self.lista_nombre.size:
+
+
+            if (nodo_lista_nombre.get_estado() == True):
+
+                j = 0
+                nodo_actual_acceso = self.lista_acceso.get_cabeza()
+
+                while j < self.lista_acceso.size:
+
+                    if (int(nodo_actual_acceso.get_contador()) == int(nodo_lista_nombre.get_contador())):
+                        contador = nodo_actual_acceso.get_contador()
+                        x = nodo_actual_acceso.get_x()
+                        y = nodo_actual_acceso.get_y()
+                        frecuencia = nodo_actual_acceso.get_frecuencia()
+                        self.asignar_grupo_frecuencia(contador,x,y,frecuencia)
+
+                    nodo_actual_acceso = nodo_actual_acceso.get_siguiente()
+                    j += 1
+
+            nodo_lista_nombre = nodo_lista_nombre.get_siguiente()
+            i+= 1
+    
+    
+    def asignar_grupo_frecuencia(self,contador,x,y,frecuencia):
+
+        # frecuencia es el inicial
+        # x posicion donde se encuentra
+
+        nodo_actual = self.lista_frecuencia.get_cabeza()
+        i = 0
+        while i < self.lista_frecuencia.size:
+
+            if (int(nodo_actual.get_contador()) == int(contador)):
+                if int(nodo_actual.get_x()) == int(x) and int(nodo_actual.get_y() == int(y)):
+                    nodo_actual.set_frecuencia(int(frecuencia))
+            nodo_actual = nodo_actual.get_siguiente()
+            i+=1
+    
+    def validar_grupos(self):
+
+        i = 0
+        nodo_nombre_frecuencia = self.lista_nombre.get_cabeza()
+        while i < self.lista_nombre.size:
+            if (nodo_nombre_frecuencia.get_estado()==True):
+                
+                j = 0
+                nodo_actual = self.lista_frecuencia.get_cabeza()
+
+                while j < self.lista_frecuencia.size:
+                    
+                    if (int(nodo_actual.get_contador()) == int(nodo_nombre_frecuencia.get_contador()) and nodo_actual.get_frecuencia()!=""):
+                        
+                        if (self.validar_grupos_(nodo_actual.get_contador(),nodo_actual.get_frecuencia())==False):
+                            
+                            self.lista_grupos.agregar(nodo_actual.get_contador(),nodo_actual.get_x(),nodo_actual.get_y(),nodo_actual.get_dato(),nodo_actual.get_estado())
+                            self.validar_grupos_agregar(nodo_actual.get_contador(),nodo_actual.get_x(),nodo_actual.get_y(),nodo_actual.get_dato(),nodo_actual.get_frecuencia())
+                    
+                    nodo_actual = nodo_actual.get_siguiente()
+                    j += 1
+
+            nodo_nombre_frecuencia = nodo_nombre_frecuencia.get_siguiente()
+            i += 1
+    
+    def validar_grupos_(self,contador,frecuencia):
+        estado = False
+        nodo_actual = self.lista_grupos.get_cabeza()
+        i=0
+        while i < self.lista_grupos.size:
+
+            if int(nodo_actual.get_contador()) == int(contador):
+                if int(nodo_actual.get_frecuencia()) == int(frecuencia):
+                    estado = True
+                    return estado
+
+            nodo_actual = nodo_actual.get_siguiente()
+            i += 1
+        
+        return estado
+
+    def validar_grupos_agregar(self,contador,x,y,dato,frecuencia):
+
+        nodo_actual = self.lista_grupos.get_cabeza()
+        i = 0 
+        
+        while i < self.lista_grupos.size:
+            
+            if (int(nodo_actual.get_contador()) == int(contador)):
+                if (int(nodo_actual.get_x()) == int(x) and int(nodo_actual.get_y()) == int(y) and int(nodo_actual.get_dato()) == int(dato)):
+                    
+                    nodo_actual.set_frecuencia(int(frecuencia))
+
+            nodo_actual = nodo_actual.get_siguiente()
             i += 1

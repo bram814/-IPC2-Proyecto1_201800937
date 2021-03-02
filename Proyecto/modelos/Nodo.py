@@ -47,4 +47,4 @@ class Nodo():
         self.frecuencia = frecuencia
 
     def __str__(self):
-        return f" {self.contador}.-  (n: {self.x} m: {self.y}) Dato: {self.dato} "
+        return f" {self.contador}.-  (n: {self.x} m: {self.y}) Dato: {self.dato} Frecuencia: g{self.frecuencia}"

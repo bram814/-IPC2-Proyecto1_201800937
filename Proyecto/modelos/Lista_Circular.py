@@ -91,18 +91,3 @@ class Lista_Circular():
         return self.utlimo
     def set_ultimo(self,ultimo):
         self.utlimo = ultimo
-    
-
-"""
-def mostrar2(self):
-        nodo_actual = self.get_cabeza()
-        print('MOSTRAR DATOS ----------')
-        if (self.size == 1):
-            print(f"{nodo_actual} MOSTRANDO {nodo_actual.get_siguiente()}")
-        while nodo_actual.get_siguiente() != self.get_cabeza():
-            print(nodo_actual.get_dato())
-            nodo_actual = nodo_actual.get_siguiente()
-            if nodo_actual.get_siguiente() == self.get_cabeza():
-                print(nodo_actual.get_dato())
-
-"""
