@@ -1,5 +1,7 @@
 from controlador.Archivo import Archivo
 from controlador.Procesamiento import Procesamiento
+from controlador.Archivo_Salida import Archivo_Salida
+
 from modelos.Lista_Circular import Lista_Circular
 
 class main():
@@ -7,8 +9,8 @@ class main():
 
     def __init__(self):
         self.cargar_archivo = Archivo()
-        self.lista = Lista_Circular()
         self.procesamiento = Procesamiento()
+        self.generar_salida = Archivo_Salida()
 
     def __menu__(self):
 
@@ -31,11 +33,10 @@ class main():
                     
                 elif variable == 3:
                     ruta_salida = str(input("Escribir ruta especifica: "))
-                    
-                    
+                    self.generar_salida.generar_archivo_salida(ruta_salida,self.cargar_archivo,self.procesamiento)
+                        
                 elif variable == 4:
-                    print('''Nombre: Jose Abraham Solorzano Herrera\n\
-                    Carnet: 201800937 ''')
+                    print('\n> Jose Abraham Solorzano Herrera\n> 201800937 \n> Introduccion a la Programación y computación 2 seccion "A" \n> Ingeniería en Ciencias y Sistemas\n> 4to Semestre\n')
 
                 elif variable == 5:
                     print('Opcion 5')

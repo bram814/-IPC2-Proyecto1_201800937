@@ -141,28 +141,3 @@ class Procesamiento():
             i += 1
 
 
-
-        """
-        print('VIENDO LA FRECUENCIA')
-        i = 0
-        nodo_actual = self.archivo.lista_grupos.get_cabeza()
-        contador = nodo_actual.get_contador()
-        incremento = 0
-        print(self.archivo.lista_grupos.size)
-
-        while i < self.archivo.lista_grupos.size:
-            print(i)
-            if (int(nodo_actual.get_contador()) != int(contador)):
-                print(f"____{incremento}")
-                incremento = 1
-                contador = nodo_actual.get_contador()
-            elif (i+1) == self.archivo.lista_grupos.size :
-                incremento += 1
-                print(f"____{incremento}")
-            else:
-                incremento += 1
-
-            nodo_actual = nodo_actual.get_siguiente()
-            i += 1
-
-        """
