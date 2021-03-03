@@ -1,9 +1,9 @@
 #http://www.graphviz.org/pdf/dotguide.pdf
 from graphviz import Digraph, nohtml
 
-g = Digraph('g', format='svg',filename='btree.gv',node_attr={'shape': 'circle', 'height': '.1'})
+g = Digraph('g', format='svg',filename='btree.gv',node_attr={'shape': 'record', 'height': '.1'})
 
-g.node('node0', nohtml('NODO00'))
+g.node('node0', nohtml('<f0> |<f1> NODO00|<f2>'))
 g.node('node1', nohtml('<f0> |<f1> E|<f2>'))
 g.node('node2', nohtml('<f0> |<f1> B|<f2>'))
 g.node('node3', nohtml('<f0> |<f1> F|<f2>'))

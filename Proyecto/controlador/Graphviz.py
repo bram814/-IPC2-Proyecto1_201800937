@@ -41,38 +41,58 @@ class Graphviz():
             nodo_nombre = nodo_nombre.get_siguiente()
             i+=1
 
-        g = Digraph('g', format='svg',filename='Reporte_Final.gv',node_attr={'shape': 'circle', 'height': '.1'})
+        g = Digraph('g', format='svg',filename='Reporte_Final.gv',node_attr={'shape': 'record', 'height': '.1'})
+        #g = Digraph('g', format='svg',filename='Reporte_Final.gv',node_attr={'shape': 'circle', 'height': '.1'})
 
-        g.node(f'node0',nohtml('Matrices'))
-        g.node(f'node1',nohtml(f'{variable_nombre}'))
-        g.node(f'node2',nohtml(f'{fila_limite}'))
-        g.node(f'node3',nohtml(f'{columna_limite}'))
+        g.node(f'node00',nohtml('Matrices'))
+        g.node(f'node01',nohtml(f'{variable_nombre}'))
+        g.node(f'node02',nohtml(f'{fila_limite}'))
+        g.node(f'node03',nohtml(f'{columna_limite}'))
 
         j = 0
         nodo_actual = self.archivo.lista_frecuencia.get_cabeza()
-        incremento = 4
+       
         while j < self.archivo.lista_frecuencia.size:
 
             if int(nodo_actual.get_contador()) == int(contador):
-                g.node(f'node{incremento}', nohtml(f'{nodo_actual.get_dato()}'))
-                incremento+=1
+                g.node(f'node{nodo_actual.get_x()}{nodo_actual.get_y()}', nohtml(f'({nodo_actual.get_x()},{nodo_actual.get_y()}) |{nodo_actual.get_dato()}'))
+                #g.node(f'node{nodo_actual.get_x()}{nodo_actual.get_y()}', nohtml(f'{nodo_actual.get_dato()}'))
+                
             nodo_actual = nodo_actual.get_siguiente()
             j+=1
         
 
-        g.edge(f'node0','node1')
-        g.edge(f'node1','node2')
-        g.edge(f'node1','node3')
+        g.edge(f'node00','node01')
+        g.edge(f'node01','node02')
+        g.edge(f'node01','node03')
+
+
+        i = 0
+        nodo_actual = self.archivo.lista_frecuencia.get_cabeza()
+
+        while i < self.archivo.lista_frecuencia.size:
+
+            if int(nodo_actual.get_contador()) == int(contador):
+                if int(nodo_actual.get_x())==1:
+                    g.edge(f'node01',f'node{nodo_actual.get_x()}{nodo_actual.get_y()}')
+
+            nodo_actual = nodo_actual.get_siguiente()
+            i+=1
+
+
+        
 
         j = 0
         nodo_actual = self.archivo.lista_frecuencia.get_cabeza()
-        incremento = 4
+        
         while j < self.archivo.lista_frecuencia.size:
 
             if int(nodo_actual.get_contador()) == int(contador):
                 if (self.archivo.lista_frecuencia.size != j+1):
-                    g.edge(f'node{incremento}',f'node{incremento+1}')
-                    incremento+=1
+                    if int(nodo_actual.get_x()) < int(fila_limite):
+                        aux = self.nodo_fila_siguiente(nodo_actual.get_contador(),nodo_actual.get_x()+1,nodo_actual.get_y()) 
+                        g.edge(f'node{nodo_actual.get_x()}{nodo_actual.get_y()}',f'node{aux.get_x()}{aux.get_y()}')
+                    
             nodo_actual = nodo_actual.get_siguiente()
             j+=1
             
@@ -83,6 +103,19 @@ class Graphviz():
 
 
 
+    def nodo_fila_siguiente(self,contador,x,y):
+        i = 0
+        nodo_actual = self.archivo.lista_frecuencia.get_cabeza()
+
+        while i < self.archivo.lista_frecuencia.size:
+
+            if int(nodo_actual.get_contador()) == int(contador):
+                if int(nodo_actual.get_x()) == int(x) and int(nodo_actual.get_y())==int(y):
+
+                    return nodo_actual
+
+            nodo_actual = nodo_actual.get_siguiente()
+            i+=1
 
 
 
