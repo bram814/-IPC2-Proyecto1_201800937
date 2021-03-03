@@ -48,7 +48,7 @@ class Archivo_Salida():
                 mensaje += f''' {self.buscando_frecuencia(nodo_nombre.get_contador(),nodo_nombre.get_y())}'''
                 
 
-                mensaje += f'''  </matriz>\n'''
+                mensaje += f''' </matriz>\n'''
             nodo_nombre = nodo_nombre.get_siguiente()
             i+=1
 
@@ -83,11 +83,12 @@ class Archivo_Salida():
         i = 0 
         mensaje = ""
         nodo_grupo = self.archivo.lista_grupos.get_cabeza()
-
+        incremento = 1
         while i < self.archivo.lista_grupos.size:
 
             if int(nodo_grupo.get_contador()) == int(contador):
                 j = 0
+                
                 nodo_actual = self.archivo.lista_frecuencia.get_cabeza() 
                 while j < self.archivo.lista_frecuencia.size:
                     
@@ -98,34 +99,10 @@ class Archivo_Salida():
                     j+=1
                 calculo = int(contador_frecuencia)/int(y)
                 contador_frecuencia = 0
-                mensaje += f'''   <frecuencia g="{str(nodo_grupo.get_frecuencia())}">{str(calculo)}</frecuencia>\n '''
+                mensaje += f'''   <frecuencia g="{str(incremento)}">{str(calculo)}</frecuencia>\n '''
+                incremento +=1
 
             nodo_grupo = nodo_grupo.get_siguiente()
             i+=1
             
         return mensaje
-
-    
-        """
-        print('VIENDO LA FRECUENCIA')
-        i = 0
-        nodo_actual = self.archivo.lista_grupos.get_cabeza()
-        contador = nodo_actual.get_contador()
-        incremento = 0
-        print(self.archivo.lista_grupos.size)
-
-        while i < self.archivo.lista_grupos.size:
-            print(i)
-            if (int(nodo_actual.get_contador()) != int(contador)):
-                print(f"____{incremento}")
-                incremento = 1
-                contador = nodo_actual.get_contador()
-            elif (i+1) == self.archivo.lista_grupos.size :
-                incremento += 1
-                print(f"____{incremento}")
-            else:
-                incremento += 1
-
-            nodo_actual = nodo_actual.get_siguiente()
-            i += 1
-        """
