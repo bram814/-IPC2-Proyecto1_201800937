@@ -1,6 +1,7 @@
 from controlador.Archivo import Archivo
 from controlador.Procesamiento import Procesamiento
 from controlador.Archivo_Salida import Archivo_Salida
+from controlador.Graphviz import Graphviz
 
 from modelos.Lista_Circular import Lista_Circular
 
@@ -11,6 +12,7 @@ class main():
         self.cargar_archivo = Archivo()
         self.procesamiento = Procesamiento()
         self.generar_salida = Archivo_Salida()
+        self.reporte_final = Graphviz()
 
     def __menu__(self):
 
@@ -39,8 +41,8 @@ class main():
                     print('\n> Jose Abraham Solorzano Herrera\n> 201800937 \n> Introduccion a la Programación y computación 2 seccion "A" \n> Ingeniería en Ciencias y Sistemas\n> 4to Semestre\n')
 
                 elif variable == 5:
-                    print('Opcion 5')
-                    
+                    self.reporte_final.generar_reporte(self.cargar_archivo,self.procesamiento)
+
                 elif variable == 6:
                     print("Exit")
                     return False
